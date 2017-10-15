@@ -37,6 +37,7 @@ class WeightedDirectedGraph():
         print("there are %s edges in total" % nr_es_present)
 
     def run_Dijkstra(self,s,f):
+        #This implementation of Dijkstra will compute the shortest distance from s to all other vertices, and the shortest path to f.
         self.ps = [None for v in range(self.nr_vs)] #list of parent of each vertex
         self.ds = [sys.maxsize for v in range(self.nr_vs)] #list of distances of each vertex
         q = [] #priority queue for Dijkstra
@@ -47,9 +48,6 @@ class WeightedDirectedGraph():
         while q:
             dv = heapq.heappop(q)
             v = dv[1]
-            
-            if (v == f):
-                break
         
             for h in self.es[v]:
                 new_d = self.ds[v] + self.ws[(v,h)]
@@ -66,7 +64,7 @@ class WeightedDirectedGraph():
 
         path.reverse()
 
-        return path, [self.ds[v] for v in path]
+        return path, self.ds #if no path exists: length of path will be 1
 
 if __name__ == "__main__":
     file_name =  'Dijkstrasimpletest1.txt'
@@ -83,8 +81,8 @@ if __name__ == "__main__":
             t, h, w = int(t)-1, int(h)-1, int(w)
             graph.add_edge(t,h,w)
 
-    start = 0
-    finish = 4
+    start = 3
+    finish = 0
 
     path, distances = graph.run_Dijkstra(start,finish)
     print(path, distances)
