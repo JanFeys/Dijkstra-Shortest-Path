@@ -66,7 +66,7 @@ class WeightedDirectedGraph():
 
         path.reverse()
 
-        return path, self.ds[f]
+        return path, [self.ds[v] for v in path]
 
 if __name__ == "__main__":
     file_name =  'Dijkstrasimpletest1.txt'
@@ -86,8 +86,8 @@ if __name__ == "__main__":
     start = 0
     finish = 4
 
-    path, dist = graph.run_Dijkstra(start,finish)
-    print(path, dist)
+    path, distances = graph.run_Dijkstra(start,finish)
+    print(path, distances)
     
     end_time = time.time()
     print(end_time - start_time)
