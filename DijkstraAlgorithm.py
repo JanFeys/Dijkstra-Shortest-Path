@@ -56,6 +56,9 @@ class WeightedDirectedGraph():
                     self.ps[h] = v
                     heapq.heappush(q,[new_d,h])
     
+        if (f == None): #not interested in shortest path to a final destination
+            return None, self.ds
+        
         path = []
         end = f
         while end is not None:
@@ -81,8 +84,8 @@ if __name__ == "__main__":
             t, h, w = int(t)-1, int(h)-1, int(w)
             graph.add_edge(t,h,w)
 
-    start = 3
-    finish = 0
+    start = 0
+    finish = 2
 
     path, distances = graph.run_Dijkstra(start,finish)
     print(path, distances)
